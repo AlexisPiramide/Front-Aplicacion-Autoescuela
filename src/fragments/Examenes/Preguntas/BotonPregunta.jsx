@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function BotonPregunta({index,opcion, numeroPregunta, setRespuestas, selecionada, setSelecionada,validar,resultado }) {
+export default function BotonPregunta({ index, opcion, numeroPregunta, setRespuestas, selecionada, setSelecionada}) {
 
     const escribirRespuesta = (e, index) => {
         setRespuestas((prevRespuestas) => {
@@ -13,31 +13,18 @@ export default function BotonPregunta({index,opcion, numeroPregunta, setRespuest
 
 
 
-        return (
-            <>
-                <li key={index + 1}>
-                    {(!validar) ? (
-                        <button
-                            id={index + 1}
-                            onClick={(e) => escribirRespuesta(e, index)}
-                            style={{
-                                backgroundColor: selecionada === Number(index + 1) ? 'green' : '',
-                            }}>
-                            {opcion}
-                        </button>
-                    ) : (
-                        <button
-                            id={index + 1}
-                            onClick={(e) => escribirRespuesta(e, index)}
-                            style={{
-                                backgroundColor: selecionada === Number(index + 1) ? (resultado?'green':'red') : 'gray',
-                            }}
-                            disabled>
-                            {opcion}
-                        </button>
-                    )}
-                </li>
-            </>
+    return (
+        <li key={index + 1}>
+
+            <button
+                id={index + 1}
+                onClick={(e) => escribirRespuesta(e, index)}
+                style={{
+                    backgroundColor: selecionada === Number(index + 1) ? 'green' : '',
+                }}>
+                {opcion}
+            </button>
+        </li >
         );
-    
+
 }

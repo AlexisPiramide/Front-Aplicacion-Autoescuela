@@ -14,7 +14,7 @@ export default function ListaExamenes() {
         if (usuario) {
             recogeExamenes(usuario)
         }
-    }, [usuario, recarga])
+    }, [usuario])
 
     const recogeExamenes = async () => {
         const result = await getExamenes(usuario)

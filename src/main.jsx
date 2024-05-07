@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import App from "./fragments/App";
 import LogIn from "./fragments/Usuario/LogIn";
 import Registro from "./fragments/Usuario/Registro";
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <h1>404</h1>,
+    element: <Navigate to="/login" />,
   },
 ]);
 

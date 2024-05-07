@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <Navegacion usuario={usuario} recarga={recarga} setRecarga={setRecarga} />
-      <Outlet context={[usuario, setUsuario, examen, setExamen, recarga, setRecarga]} />
+      <Outlet context={[usuario, setUsuario, examen, setExamen]} />
     </>
   )
 }

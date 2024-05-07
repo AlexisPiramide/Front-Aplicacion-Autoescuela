@@ -13,30 +13,46 @@ export default function Examen() {
     const [usuario] = useOutletContext();
     const [, , examen] = useOutletContext();
 
-    const [, , , , recarga] = useOutletContext();
-    const [, , , , , setRecarga] = useOutletContext();
-
     const [respuestas, setRespuestas] = useState([])
-    
+
     const [validar, setValidar] = useState(false)
+
+    useEffect(() => {
+        if (respuestas.length !== examen.preguntas.length || respuestas.some(respuesta => respuesta === undefined)) {
+            setValidar(false)
+        } else {
+            setValidar(true)
+        }
+    }, [respuestas]);
+
+    useEffect(() => {
+        console.log(validar)
+    }, [validar])
 
     const enviarRespuestas = async (e) => {
         e.preventDefault()
-        const result = await postRespuestas(respuestas, examen.id, usuario)
-        if (result) {
-            setRecarga(!recarga);
+        
+        try {
+            const result = await postRespuestas(respuestas, examen.id, usuario)
             navigate("/examenes");
-        }
-
+        }catch(error){
+            console.log(error)
+            navigate("/examenes");
+        } 
     }
-
 
     return (
         <>
             {examen != undefined ? examen.preguntas.map((pregunta, index) => (
-                <Pregunta pregunta={pregunta} validar={validar} respuestas={respuestas} setRespuestas={setRespuestas} numeroPregunta={index} key={index} />
+                <Pregunta pregunta={pregunta} respuestas={respuestas} setRespuestas={setRespuestas} numeroPregunta={index} key={index} />
             )) : ''}
-            {examen != undefined ? (respuestas.length !== examen.preguntas.length) ? <button style={{ backgroundColor: 'gray' }}>Enviar Respuestas</button> : <button onClick={(e) => enviarRespuestas(e)} disabled={validar} style={{ backgroundColor: validar ? 'gray' : '#007bff' }}>Enviar Respuestas</button> : ''}
+            {examen != undefined ?
+                (!validar) ?
+                    <button style={{ backgroundColor: 'gray' }} disabled={true}>Enviar Respuestas</button>
+                    :
+                    <button onClick={(e) => enviarRespuestas(e)} style={{ backgroundColor: 'blue' }}>Enviar Respuestas</button>
+                : ''
+            }
 
         </>
     )
