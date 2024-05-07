@@ -11,14 +11,14 @@ export default function Examen() {
     const navigate = useNavigate();
 
     const [usuario] = useOutletContext();
-    const [, , , ,  examen] = useOutletContext();
+    const [, , examen] = useOutletContext();
 
-    const [,,,, recarga] = useOutletContext();
-    const [,,,,, setRecarga] = useOutletContext();
+    const [, , , , recarga] = useOutletContext();
+    const [, , , , , setRecarga] = useOutletContext();
 
     const [respuestas, setRespuestas] = useState([])
+    
     const [validar, setValidar] = useState(false)
-
 
     const enviarRespuestas = async (e) => {
         e.preventDefault()
@@ -30,9 +30,9 @@ export default function Examen() {
 
     }
 
+
     return (
         <>
-
             {examen != undefined ? examen.preguntas.map((pregunta, index) => (
                 <Pregunta pregunta={pregunta} validar={validar} respuestas={respuestas} setRespuestas={setRespuestas} numeroPregunta={index} key={index} />
             )) : ''}

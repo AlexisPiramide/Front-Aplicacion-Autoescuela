@@ -1,10 +1,12 @@
 import '../../style/ExamenBoton.css';
 import { getExamen, getRespuestas } from '../../services/services.examenes';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
-export default function ExamenBoton({ examenDibujar, setExamen, usuario }) {
+export default function ExamenBoton({ examenDibujar, usuario }) {
     const navigate = useNavigate();
 
+
+    const [, , ,setExamen] = useOutletContext();
     const abrirExamen = async (e) => {
         e.preventDefault();
        
