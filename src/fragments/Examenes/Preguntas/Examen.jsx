@@ -31,7 +31,7 @@ export default function Examen() {
 
     const enviarRespuestas = async (e) => {
         e.preventDefault()
-        
+         
         try {
             const result = await postRespuestas(respuestas, examen.id, usuario)
             navigate("/examenes");
